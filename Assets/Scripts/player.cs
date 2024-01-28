@@ -8,7 +8,9 @@ public class player : MonoBehaviour
     public Transform transform;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
-    public GameObject panel;
+    public GameObject panel, particle, weapon;
+    public AudioSource audioSource;
+    public AudioClip jumpAudio, takeCoinAudio;
 
     public float jumpForce, movingSeped;
 
@@ -35,6 +37,16 @@ public class player : MonoBehaviour
         isRightBtnDown = false;
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Coin")
+        {
+            audioSource.PlayOneShot(takeCoinAudio);
+            Destroy(other.gameObject);
+            //score++;
+            //txtScore.SetText(score.ToString());
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -54,6 +66,8 @@ public class player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instantiate(particle, transform);
+        Instantiate(weapon, transform);
         move = new Vector3(movingSeped, 0, 0) * Time.deltaTime;
     }
 
@@ -82,6 +96,7 @@ public class player : MonoBehaviour
     {
         if (isCanJump)
         {
+            audioSource.PlayOneShot(jumpAudio);
             rigidbody2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isCanJump = false;
             animator.SetBool("jump", true);
