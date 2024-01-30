@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Spike
   - Weapon
+  - Flag
   layers:
   - Default
   - TransparentFX

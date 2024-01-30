@@ -15,8 +15,6 @@ GameObject:
   - component: {fileID: 6599104099305623421}
   - component: {fileID: 3907935961124796714}
   - component: {fileID: 4585954777196441690}
-  - component: {fileID: 3331130128129996793}
-  - component: {fileID: 8921302692418691760}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -135,7 +133,8 @@ MonoBehaviour:
   jumpAudio: {fileID: 8300000, guid: 280b567ff0c194034ae2c61af5521093, type: 3}
   takeCoinAudio: {fileID: 8300000, guid: f42463d52bc914a97adcf6ce89a98421, type: 3}
   jumpForce: 7
-  movingSeped: 2
+  movingSeped: 3
+  txtScore: {fileID: 0}
 --- !u!70 &6599104099305623421
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -294,34 +293,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3331130128129996793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3512677383453026825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
---- !u!114 &8921302692418691760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3512677383453026825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: d61d8dc71f9c2e54d887f297eb33964d, type: 2}

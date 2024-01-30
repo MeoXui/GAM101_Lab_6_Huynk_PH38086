@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {
@@ -13,8 +16,10 @@ public class player : MonoBehaviour
     public AudioClip jumpAudio, takeCoinAudio;
 
     public float jumpForce, movingSeped;
-
     Vector3 move;
+
+    public TextMeshProUGUI txtScore;
+    int score = 0;
 
     bool isCanJump = false, isDead = false, isLeftBtnDown = false, isRightBtnDown = false;
 
@@ -43,8 +48,14 @@ public class player : MonoBehaviour
         {
             audioSource.PlayOneShot(takeCoinAudio);
             Destroy(other.gameObject);
-            //score++;
-            //txtScore.SetText(score.ToString());
+            score++;
+            txtScore.SetText(score.ToString());
+        }
+        if (other.gameObject.tag == "Flag")
+        {
+            score += 100;
+            txtScore.SetText(score.ToString());
+            nextLevel();
         }
     }
 
@@ -55,11 +66,11 @@ public class player : MonoBehaviour
             isCanJump = true;
             animator.SetBool("jump", false);
         }
-        if (other.gameObject.tag == "Spike")
+        if (other.gameObject.tag == "Spike" || other.gameObject.tag == "Enemy")
         {
-            panel.SetActive(true);
             dead();
             Time.timeScale = 0;
+            panel.SetActive(true);
         }
     }
 
@@ -67,7 +78,7 @@ public class player : MonoBehaviour
     void Start()
     {
         Instantiate(particle, transform);
-        Instantiate(weapon, transform);
+        //Instantiate(weapon, transform);
         move = new Vector3(movingSeped, 0, 0) * Time.deltaTime;
     }
 
@@ -117,5 +128,13 @@ public class player : MonoBehaviour
         transform.Translate(move);
         animator.SetBool("idle", false);
         animator.SetBool("run", true);
+    }
+
+    public void nextLevel()
+    {
+        if (SceneManager.GetActiveScene().name == "Level 1")
+            SceneManager.LoadScene("Level 2");
+        if (SceneManager.GetActiveScene().name == "Level 2")
+            SceneManager.LoadScene("Thank you");
     }
 }
