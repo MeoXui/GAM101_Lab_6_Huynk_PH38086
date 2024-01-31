@@ -132,8 +132,9 @@ MonoBehaviour:
   audioSource: {fileID: 4585954777196441690}
   jumpAudio: {fileID: 8300000, guid: 280b567ff0c194034ae2c61af5521093, type: 3}
   takeCoinAudio: {fileID: 8300000, guid: f42463d52bc914a97adcf6ce89a98421, type: 3}
+  takeDamageAudio: {fileID: 8300000, guid: 2d38f6c9cd37a4ea3b444b135e81911a, type: 3}
   jumpForce: 7
-  movingSeped: 3
+  movingSeped: 0.09
   txtScore: {fileID: 0}
 --- !u!70 &6599104099305623421
 CapsuleCollider2D:

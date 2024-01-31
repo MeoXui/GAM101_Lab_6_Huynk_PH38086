@@ -13,7 +13,7 @@ public class player : MonoBehaviour
     public Animator animator;
     public GameObject panel, particle, weapon;
     public AudioSource audioSource;
-    public AudioClip jumpAudio, takeCoinAudio;
+    public AudioClip jumpAudio, takeCoinAudio, takeDamageAudio;
 
     public float jumpForce, movingSeped;
     Vector3 move;
@@ -69,8 +69,6 @@ public class player : MonoBehaviour
         if (other.gameObject.tag == "Spike" || other.gameObject.tag == "Enemy")
         {
             dead();
-            Time.timeScale = 0;
-            panel.SetActive(true);
         }
     }
 
@@ -78,23 +76,27 @@ public class player : MonoBehaviour
     void Start()
     {
         Instantiate(particle, transform);
-        //Instantiate(weapon, transform);
-        move = new Vector3(movingSeped, 0, 0) * Time.deltaTime;
+        move = new Vector3(movingSeped, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isLeftBtnDown) moveLeft();
+        if (Time.timeScale == 0) ;
+        else if (isLeftBtnDown) moveLeft();
         else if (isRightBtnDown) moveRight();
         else idle();
     }
 
     public void dead()
     {
+        audioSource.PlayOneShot(takeDamageAudio);
         animator.SetBool("dead", true);
         animator.SetBool("run", false);
         animator.SetBool("jump", false);
+        Time.timeScale = 0;
+        panel.SetActive(true);
+        BtnUp();
     }
 
     public void idle()
@@ -105,7 +107,8 @@ public class player : MonoBehaviour
 
     public void jump()
     {
-        if (isCanJump)
+        if (Time.timeScale == 0) ;
+        else if (isCanJump)
         {
             audioSource.PlayOneShot(jumpAudio);
             rigidbody2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
